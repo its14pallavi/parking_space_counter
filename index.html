@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parking Space Status</title>
+</head>
+<body>
+    <h1>Parking Space Status</h1>
+    <p>Vehicle Count: {{ vehicleCount }}</p>
+    <table>
+        <tr>
+            <th>Parking Space</th>
+            <th>Status</th>
+            <th>Duration</th>
+        </tr>
+        {% for pos in posList %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                {% if vehicle_states[pos] %}
+                Occupied
+                {% else %}
+                Empty
+                {% endif %}
+            </td>
+            <td>
+                {% if entry_times.get(pos) %}
+                {{ '%.2f' % (now() - entry_times[pos]) }} seconds
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
